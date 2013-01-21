@@ -1,108 +1,86 @@
-**SrcExpl**
-===========
+# ctrlp.vim
+Full path fuzzy __file__, __buffer__, __mru__, __tag__, __...__ finder for Vim.
 
-SrcExpl (Source Explorer) is a source code explorer that provides context for the currently
-selected keyword by displaying the function or type definition or declaration
-in a separate window. This plugin aims to recreate the context window available
-in the IDE known as "Source Insight".
+* Written in pure Vimscript for MacVim, gVim and Vim 7.0+.
+* Full support for Vim's regexp as search patterns.
+* Built-in Most Recently Used (MRU) files monitoring.
+* Built-in project's root finder.
+* Open multiple files at once.
+* Create new files and directories.
+* [Extensible][2].
 
-Features
-========
+![ctrlp][1]
 
-* Display definitions and declarations of various languages supported
-      by ctags and various types including functions, macros, structures,
-      arrays, methods, classes, and variables.
-* Jump to the displayed context in the Source Explorer window using the mouse or
-      your own key mapping.
-* Jump back from the context location with the mouse context menu or your
-      own key mapping.
-* Automatically list all definitions if multiple definitions for a keyword
-      is found.
-* Automatically create and update the tags file.
+## Basic Usage
+* Run `:CtrlP` or `:CtrlP [starting-directory]` to invoke CtrlP in find file mode.
+* Run `:CtrlPBuffer` or `:CtrlPMRU` to invoke CtrlP in find buffer or find MRU file mode.
+* Run `:CtrlPMixed` to search in Files, Buffers and MRU files at the same time.
 
-Installation
-============
-1. Ensure ctags is installed on your system and that VIM can use it.
-2. Place the Source Explorer files in your Vim directory (such as ~/.vim) 
-   or have it installed by a bundle manager like Vundle or NeoBundle.
-3. Open the Source Explorer window with *:SrcExpl* or *:SrcExplToggle* or map these
-   commands to keys in your .vimrc.
+Check `:help ctrlp-commands` and `:help ctrlp-extensions` for other commands.
 
-Requirements
-------------
-Source Explorer requires:
-* Vim 7.0 or higher
-* ctags
+##### Once CtrlP is open:
+* Press `<F5>` to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+* Press `<c-f>` and `<c-b>` to cycle between modes.
+* Press `<c-d>` to switch to filename only search instead of full path.
+* Press `<c-r>` to switch to regexp mode.
+* Use `<c-n>`, `<c-p>` to select the next/previous string in the prompt's history.
+* Use `<c-y>` to create a new file and its parent directories.
+* Use `<c-z>` to mark/unmark multiple files and `<c-o>` to open them.
 
-Screenshots
-===========
+Run `:help ctrlp-mappings` or submit `?` in CtrlP for more mapping help.
 
-One Declaration Found
----------------------
-![One Declaration Found](http://i.imgur.com/bbGVO.jpg)
+* Submit two or more dots `..` to go up the directory tree by one or multiple levels.
+* End the input string with a colon `:` followed by a command to execute it on the opening file(s):  
+Use `:25` to jump to line 25.  
+Use `:diffthis` when opening multiple files to run `:diffthis` on the first 4 files.
 
-Multiple Declarations Found
----------------------------
-![Multiple Declarations Found](http://i.imgur.com/77HeV.jpg)
+## Basic Options
+* Change the default mapping and the default command to invoke CtrlP:
 
-Local Declaration Found
------------------------
-![Local Declaration Found](http://i.imgur.com/dQXqL.jpg)
+    ```vim
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlP'
+    ```
 
-Settings Example
-================
-```vim
-" // The switch of the Source Explorer 
-nmap <F8> :SrcExplToggle<CR> 
+* When invoked, unless a starting directory is specified, CtrlP will set its local working directory according to this variable:
 
-" // Set the height of Source Explorer window 
-let g:SrcExpl_winHeight = 8 
+    ```vim
+    let g:ctrlp_working_path_mode = 'ra'
+    ```
 
-" // Set 100 ms for refreshing the Source Explorer 
-let g:SrcExpl_refreshTime = 100 
+    `'c'` - the directory of the current file.  
+    `'r'` - the nearest ancestor that contains one of these directories or files: `.git` `.hg` `.svn` `.bzr` `_darcs`  
+    `'a'` - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.  
+    `0` or `''` (empty string) - disable this feature.
 
-" // Set "Enter" key to jump into the exact definition context 
-let g:SrcExpl_jumpKey = "<ENTER>" 
+    Define additional root markers with the `g:ctrlp_root_markers` option.
 
-" // Set "Space" key for back from the definition context 
-let g:SrcExpl_gobackKey = "<SPACE>" 
+* Exclude files and directories using Vim's `wildignore` and CtrlP's own `g:ctrlp_custom_ignore`:
 
-" // In order to Avoid conflicts, the Source Explorer should know what plugins 
-" // are using buffers. And you need add their bufname into the list below 
-" // according to the command ":buffers!" 
-let g:SrcExpl_pluginList = [ 
-        \ "__Tag_List__", 
-        \ "_NERD_tree_", 
-        \ "Source_Explorer" 
-    \ ] 
+    ```vim
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-" // Enable/Disable the local definition searching, and note that this is not 
-" // guaranteed to work, the Source Explorer doesn't check the syntax for now. 
-" // It only searches for a match with the keyword according to command 'gd' 
-let g:SrcExpl_searchLocalDef = 1 
+    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+    let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
+    ```
 
-" // Do not let the Source Explorer update the tags file when opening 
-let g:SrcExpl_isUpdateTags = 0 
+* Use a custom file listing command:
 
-" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
-" //  create/update a tags file 
-let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
+    ```vim
+    let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+    let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+    ```
 
-" // Set "<F12>" key for updating the tags file artificially 
-let g:SrcExpl_updateTagsKey = "<F12>" 
-```
+Check `:help ctrlp-options` for other options.
 
-Changelog
-=========
-5.0
-- Replaced use of preview window with a named buffer.
-- Moved to github.
-- Added documentation.
+## Installation
+Use your favorite method or check the homepage for a [quick installation guide][3].
 
-5.1
-- Added two APIs for serving other plugins:
-    1. SrcExpl_GetWin(), getting the Source Explorer window number for those
-    plugins based on multiple windows.
-    2. SrcExpl_GetVer(), getting the Source Explorer version for the forward
-    compatibility.
-- Added debug/logging functions for the internal development.
+[1]: http://i.imgur.com/yIynr.png
+[2]: https://github.com/kien/ctrlp.vim/tree/extensions
+[3]: http://kien.github.com/ctrlp.vim#installation

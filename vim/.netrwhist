@@ -1,11 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/lalor/github/script'
-let g:netrw_dirhist_2='/home/lalor/temp/lalor.github.com/_theme_packages/hooligan/_includes/themes/hooligan'
-let g:netrw_dirhist_3='/home/lalor/github/lalor.github.com/assets/themes'
-let g:netrw_dirhist_4='/home/lalor/github/lalor.github.com/_includes/themes/tom'
-let g:netrw_dirhist_5='/home/lalor/code/python'
-let g:netrw_dirhist_6='/home/lalor/github/yihui.github.com/_layouts'
-let g:netrw_dirhist_7='/home/lalor/github/cn/media/js'
-let g:netrw_dirhist_8='/home/lalor/code/temp'
-let g:netrw_dirhist_9='/home/lalor/github/cn/_posts'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/lalor/temp'
+let g:netrw_dirhist_2='/home/lalor/github/lalor.github.com/media'
+let g:netrw_dirhist_3='/home/lalor/temp'

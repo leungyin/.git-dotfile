@@ -99,7 +99,6 @@ source ~/.alias
 hash -d cn="/home/lalor/github/cn"
 hash -d d="/home/lalor/download"
 hash -d p="/home/lalor/note/public"
-
 hash -d post="/home/lalor/code/postgresql-7.4.30/src/backend/storage/buffer"
 hash -d E="/etc/env.d"
 hash -d C="/etc/conf.d"
@@ -107,23 +106,10 @@ hash -d I="/etc/rc.d"
 hash -d X="/etc/X11"
 hash -d note="/home/lalor/note"
 
-###for Emacs在Emacs终端中使用Zsh的一些设置 不推荐在Emacs中使用它
-#if [[ "$TERM" == "dumb" ]]; then
-#setopt No_zle
-#PROMPT='%n@%M %/
-#>>'
-#alias ls='ls -F'
-#fi 
-
-set JAVA_HOME=/usr/local/jdk1.6.0_31 
-set JAVA_BIN=/usr/local/jdk1.6.0_31/bin 
-#set JAVA_HOME=/usr/share/jdk1.6.0_31 
-export JAVA_HOME 
-export JAVA_BIN 
-set PATH=$JAVA_HOME/bin:$PATH 
-export PATH 
-set CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar 
-export CLASSPATH 
+set JAVA_HOME=/usr/java/jdk1.6.0_38
+set CLASSPATH=.:$JAVA_HOME:/lib/tools.jar:/lib.dt.jar
+set PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME CLASSPATH PATH
 
 #xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' 
 
@@ -147,7 +133,7 @@ if [ "$TERM" = "linux" ]; then
 	clear #for background artifacting
 fi
 
-#make man colorful
+#make man page colorful
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'

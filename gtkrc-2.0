@@ -16,7 +16,7 @@ style "mono" = "default" {
 }
 
 style "tooltips" {
-    font_name = "微软雅黑 11"
+    font_name = "微软雅黑 12"
   bg[NORMAL] = "#EEE1B3"
   fg[NORMAL] = "#000000"
 }

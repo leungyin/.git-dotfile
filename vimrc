@@ -92,7 +92,7 @@ set viminfo^=%
 "reselect the text that was just pasted
 nnoremap <leader>V V`]
 "select all texts
-nnoremap <leader>v ggvG
+nnoremap <leader>v ggvG$
 "Select the contents of the current line, excluding indentation.
 nnoremap vv ^vg_
 
@@ -179,6 +179,7 @@ set foldmethod=indent
 "a few options that just make things better and other settings
 "http://stevelosh.com/blog/2010/09/coming-home-to-vim
 """"""""""""""""""""""
+set listchars=tab:\ \ ,trail:.
 set encoding=utf-8
 "Set Unix as the standard encoding and en_US as the Standard language
 set ffs=unix,dos,mac
@@ -399,6 +400,26 @@ let g:miniBufExplModSelTarget = 1
 """"""""""""""""""""""
 "自动加载 Rain_bow_parenthese 插件
 au Syntax *  RainbowParenthesesToggleAll
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
 
 
 
@@ -406,29 +427,22 @@ au Syntax *  RainbowParenthesesToggleAll
 " doxygenToolkit
 """"""""""""""""""""""
 "这样就不用每次需要输入作者的名字了
-let g:DoxygenToolkit_authorName="lai mingxing"
+let g:DoxygenToolkit_authorName="Mingxing LAI"
 let g:DoxygenToolkit_brifTag_funcName="yes"
 "let g:DoxygenToolkit_blockHeader="---------------"
 "let g:DoxygenToolkit_blockFooter="---------------"
 
-map <F3>a :DoxAuthor<CR>
-map <F3>f :Dox<CR>
-map <F3>b :DoxBlock<CR>
-map <F3>c O/* */<Left><Left>
-map <F3>l :DoxBlock<CR>
+map <leader>da :DoxAuthor<CR>
+map <leader>df :Dox<CR>
+map <leader>db :DoxBlock<CR>
+map <leader>dc O/* */<Left><Left>
+map <leader>dl :DoxBlock<CR>
 
 
 
 """"""""""""""""""""""
 " mru.vim
 """"""""""""""""""""""
-"exclude files or directory in unix
-"let MRU_Exclude_Files="^/tmp/.*\|^/var/tmp/.*'
-"这是很明显的正则表达式，
-"可以忽略特定目录或者特性
-"带后缀名的文件,也可以只
-"包含部分文件,如下所示
-"let MRU_Include_Files="\.c$\|.h$'
 let MRU_Exclude_Files='.*\.vim$'
 map <leader>m :MRU<CR>
 
@@ -480,50 +494,12 @@ let g:yankring_history_file = '.my_yankring_history_file'
 
 
 """"""""""""""""""""""
-" Command-T
-""""""""""""""""""""""
-"install Command-T:
-"	cd ~/.vim/ruby/command-t
-"	ruby extconf.rb
-"	make
-nmap <leader>o :CommandT<CR>
-
-
-
-""""""""""""""""""""""
-" cscope
-""""""""""""""""""""""
-"if filereadable("cscope.out")
-"	cs add cscope.out
-"elseif $CSCOPE_DB != ""
-"	cs add $CSCOPE_DB
-"endif
-"nmap <C-@>s :cscope find s <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-@>g :cscope find g <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-@>c :cscope find c <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-@>t :cscope find t <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-@>e :cscope find e <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-@>f :cscope find f <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-@>i :cscope find i ^<C-R>=expand("<cword>")<CR>$<CR>
-"nmap <C-@>d :cscope find d <C-R>=expand("<cword>")<CR><CR>
-
-
-""""""""""""""""""""""
 " SrcExpl
 """"""""""""""""""""""
-"The switch of the Source Explorer 
 nmap <F9> :SrcExplToggle<CR> 
-
-"Set the height of Source Explorer window 
 let g:SrcExpl_winHeight = 8 
-
-"Set 100 ms for refreshing the Source Explorer 
 let g:SrcExpl_refreshTime = 100 
-
-"Set "Enter" key to jump into the exact definition context 
 let g:SrcExpl_jumpKey = "<ENTER>" 
-
-"Set "Space" key for back from the definition context 
 let g:SrcExpl_gobackKey = "<SPACE>" 
 
 "In order to Avoid conflicts, the Source Explorer should know what plugins 
@@ -542,13 +518,91 @@ let g:SrcExpl_pluginList = [
 " // guaranteed to work, the Source Explorer doesn't check the syntax for now. 
 " // It only searches for a match with the keyword according to command 'gd' 
 let g:SrcExpl_searchLocalDef = 1 
-
-"Do not let the Source Explorer update the tags file when opening 
 let g:SrcExpl_isUpdateTags = 0 
-
-"Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
-" create/update a tags file 
 let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
 
 "Set "<F12>" key for updating the tags file artificially 
-let g:SrcExpl_updateTagsKey = "<F12>" 
+let g:SrcExpl_updateTagsKey = "<F13>" 
+
+
+
+""""""""""""""""""""""
+" ctrlp.vim
+""""""""""""""""""""""
+let g:ctrlp_map = '<c-m>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode='ra'
+"Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+"Press <c-f> and <c-b> to cycle between modes.
+"Press <c-d> to switch to filename only search instead of full path.
+"Press <c-r> to switch to regexp mode.
+"Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+"Use <c-y> to create a new file and its parent directories.
+"Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+
+
+""""""""""""""""""""""
+" EasyMotion
+""""""""""""""""""""""
+let g:EasyMotion_leader_key = '<Leader>'
+
+
+
+""""""""""""""""""""""
+" nerd_commenter
+""""""""""""""""""""""
+""[count]<leader>cc |NERDComComment| 
+""Comment out the current line or text selected in visual mode. 
+""
+""
+""[count]<leader>cn |NERDComNestedComment| 
+""Same as <leader>cc but forces nesting. 
+""
+""
+""[count]<leader>c<space> |NERDComToggleComment| 
+""Toggles the comment state of the selected line(s). If the topmost selected 
+""line is commented, all selected lines are uncommented and vice versa. 
+""
+""
+""[count]<leader>cm |NERDComMinimalComment| 
+""Comments the given lines using only one set of multipart delimiters. 
+""
+""
+""[count]<leader>ci |NERDComInvertComment| 
+""Toggles the comment state of the selected line(s) individually. 
+""
+""
+""[count]<leader>cs |NERDComSexyComment| 
+""Comments out the selected lines ``sexily'' 
+""
+""
+""[count]<leader>cy |NERDComYankComment| 
+""Same as <leader>cc except that the commented line(s) are yanked first. 
+""
+""
+""<leader>c$ |NERDComEOLComment| 
+""Comments the current line from the cursor to the end of line. 
+""
+""
+""<leader>cA |NERDComAppendComment| 
+""Adds comment delimiters to the end of line and goes into insert mode between 
+""them. 
+""
+""
+""|NERDComInsertComment| 
+""Adds comment delimiters at the current cursor position and inserts between. 
+""Disabled by default. 
+""
+""
+""<leader>ca |NERDComAltDelim| 
+""Switches to the alternative set of delimiters. 
+""
+""
+""[count]<leader>cl 
+""[count]<leader>cb    |NERDComAlignedComment| 
+""Same as |NERDComComment| except that the delimiters are aligned down the 
+""left side (<leader>cl) or both sides (<leader>cb). 
+""
+""
+""[count]<leader>cu |NERDComUncommentLine| 
+""Uncomments the selected line(s). 

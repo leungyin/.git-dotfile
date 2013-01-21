@@ -8,6 +8,9 @@ init:
 	ln -fs `pwd`/zshrc ~/.zshrc
 	ln -fs `pwd`/awesome ~/.config/awesome
 	ln -fs `pwd`/gtkrc-2.0 ~/.gtkrc-2.0
+	mkdir -p `pwd`/vim/tmp/undo
+	mkdir -p `pwd`/vim/tmp/swap
+	mkdir -p `pwd`/vim/tmp/backup
 
 clear:
 	rm -rf ~/.config/awesome

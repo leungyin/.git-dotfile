@@ -50,7 +50,7 @@ require("naughty")
 -- 输入法
 awful.util.spawn_with_shell("ibus-daemon --xim")  
 --网络管理程序
-awful.util.spawn_with_shell("nm-applet")  
+--awful.util.spawn_with_shell("nm-applet")  
 --电源管理
 awful.util.spawn_with_shell("gnome-power-manager")  
 --屏幕保护
@@ -99,6 +99,7 @@ beautiful.init("/home/lalor/.config/awesome/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "nano"
+homedir = os.getenv("HOME") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -295,7 +296,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ altkey, "Control"  }, "t", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("gnome-open /home/lalor") end),
-    awful.key({ altkey, "Control"  }, "y", function () awful.util.spawn("google-chrome") end),
+    awful.key({ altkey, "Control"  }, "y", function () awful.util.spawn("chromium-browser") end),
 
     --user-defined
     awful.key({ modkey, "Control" }, "r", awesome.restart),
