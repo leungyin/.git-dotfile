@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/home/lalor/temp'
 let g:netrw_dirhist_2='/home/lalor/github/lalor.github.com/media'
 let g:netrw_dirhist_3='/home/lalor/temp'
+let g:netrw_dirhist_4='/home/lalor/.macbuntu'
+let g:netrw_dirhist_5='/home/lalor/linziyu/lesson'

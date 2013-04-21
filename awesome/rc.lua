@@ -297,9 +297,10 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, "Control"  }, "t", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("gnome-open /home/lalor") end),
     awful.key({ altkey, "Control"  }, "y", function () awful.util.spawn("chromium-browser") end),
+    awful.key({ altkey, "Control"  }, "i", function () awful.util.spawn("chromium-browser") end),
 
     --user-defined
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
+    awful.key({ modkey, "Shift" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"}, "q", awesome.quit),
 
     --使用Mod+Ctrl+M 放大当前窗口

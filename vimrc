@@ -314,6 +314,7 @@ syntax enable
 """"""""""""""""""""""
 "colors
 """"""""""""""""""""""
+"colorscheme lmx
 colorscheme molokai
 set t_Co=256
 "set background=dark
@@ -325,9 +326,9 @@ set t_Co=256
 """"""""""""""""""""""
 ab fu  #include "apue.h"<Enter><Enter>int main(int argc, char* argv[])<Enter>{<Enter>exit(0);<Enter>}<Esc>
 "c框架frame
-ab fc  #include <stdio.h><Enter><Enter>int main(int argc, char* argv[])<Enter>{<Enter>return 0;<Enter><Backspace>}<ESC>
+ab fc  #include <stdio.h><Enter><Enter>int main(int argc, char* argv[])<Enter>{<Enter><Tab>return 0;<Enter>}<ESC>
 "c++框架frame
-ab fcpp  #include <iostream><Enter>using namespace std;<Enter><Enter>int main(int argc, char* argv[])<Enter>{<Enter>return 0;<Enter><Backspace>}<Esc>
+ab fcpp  #include <iostream><Enter>using namespace std;<Enter><Enter>int main(int argc, char* argv[])<Enter>{<Enter><Tab>return 0;<Enter>}<Esc>
 "设置文件头<Enter> = <CR>
 "map <F8> ggO/*<CR>* Copyright(c) Computer Science Department of XiaMen University <CR>*<CR>* Authored by lalor on:<Esc>:read !date <CR>kJ$a<CR>*<CR>* Email: mingxinglai(at)gmail.com<CR>*<CR>* @desc:<CR>*<CR>* @history<CR>*/<Esc>
 "设置函数头
@@ -460,7 +461,11 @@ let g:calendar_diary="~/.diary"
 """"""""""""""""""""""
 " Tabular.vim
 """"""""""""""""""""""
-map <leader>i :Tab/
+nmap <Leader>i :Tab /
+nmap <Leader>i= :Tab /=<CR>
+vmap <Leader>i= :Tab /=<CR>
+nmap <Leader>i: :Tab /:\zs<CR>
+vmap <Leader>i: :Tab /:\zs<CR>
 
 
 
@@ -606,3 +611,10 @@ let g:EasyMotion_leader_key = '<Leader>'
 ""
 ""[count]<leader>cu |NERDComUncommentLine| 
 ""Uncomments the selected line(s). 
+
+
+
+""""""""""""""""""""""
+" Pydoc
+""""""""""""""""""""""
+let g:EasyMotion_leader_key = '<Leader>'

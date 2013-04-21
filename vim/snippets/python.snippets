@@ -1,8 +1,25 @@
 snippet #!
 	#!/usr/bin/python
+	#-*- coding: UTF-8 -*-
 
 snippet imp
 	import ${1:module}
+snippet fr
+	from ${1:module} import ${2:fun}
+
+
+snippet if
+	if ${1:True} :
+		${2:break}
+
+snippet elif
+	elif ${1:True} :
+		${2:break}
+
+snippet el
+	else:
+		${2:break}
+	
 # Module Docstring
 snippet docs
 	'''
@@ -24,6 +41,13 @@ snippet cl
 			${5:super($1, self).__init__()}
 			self.$4 = $4
 			${6}
+#New Class
+snippet c
+	class ${1:ClassName}():
+		"""${2:docstring for $1}"""
+		def __init__(self, ${3:arg}):
+			self.$3 = $3
+			${4}
 # New Function
 snippet def
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
@@ -47,6 +71,10 @@ snippet property
 # Lambda
 snippet ld
 	${1:var} = lambda ${2:vars} : ${3:action}
+
+#print
+snippet pr
+	print('${1:str}'${2:,end=' '})
 snippet .
 	self.
 snippet try Try/Except
