@@ -50,7 +50,7 @@ require("naughty")
 -- 输入法
 awful.util.spawn_with_shell("ibus-daemon --xim")  
 --网络管理程序
---awful.util.spawn_with_shell("nm-applet")  
+awful.util.spawn_with_shell("nm-applet")  
 --电源管理
 awful.util.spawn_with_shell("gnome-power-manager")  
 --屏幕保护

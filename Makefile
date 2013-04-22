@@ -11,6 +11,8 @@ init:
 	mkdir -p `pwd`/vim/tmp/undo
 	mkdir -p `pwd`/vim/tmp/swap
 	mkdir -p `pwd`/vim/tmp/backup
+	sudo apt-get install exuberant-ctags
+	sudo chsh -s /bin/zsh
 
 clear:
 	rm -rf ~/.config/awesome
