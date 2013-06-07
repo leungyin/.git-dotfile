@@ -27,7 +27,7 @@ if [[ ! -d ~/.git-dotfile ]]; then
    echo ".git-dotfile not existss" 
 else
     cd ~/.git-dotfile
-    python `pwd`/goagent/local/proxy.py &
+#python `pwd`/goagent/local/proxy.py &
 fi
 
 cd ~
@@ -35,4 +35,4 @@ cd ~
 
 #brightness of screen
 #prequisite: chmod 777 /sys/class/backlight/acpi_video0/brightness
-echo "500" > /sys/class/backlight/acpi_video0/brightness
+#echo "500" > /sys/class/backlight/acpi_video0/brightness

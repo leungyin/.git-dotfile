@@ -296,8 +296,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ altkey, "Control"  }, "t", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("gnome-open /home/lalor") end),
-    awful.key({ altkey, "Control"  }, "y", function () awful.util.spawn("chromium-browser") end),
-    awful.key({ altkey, "Control"  }, "i", function () awful.util.spawn("chromium-browser") end),
+    awful.key({ altkey, "Control"  }, "y", function () awful.util.spawn("google-chrome") end),
 
     --user-defined
     awful.key({ modkey, "Shift" }, "r", awesome.restart),
